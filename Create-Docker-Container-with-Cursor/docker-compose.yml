@@ -1,0 +1,22 @@
+services:
+  my-db:
+    image: postgres:latest
+    container_name: my-db
+    environment:
+      POSTGRES_DB: nextwork
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8081:8080"
+    depends_on:
+      - my-db
+
+volumes:
+  postgres_data:
